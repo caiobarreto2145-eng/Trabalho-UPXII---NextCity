@@ -1,5 +1,5 @@
 # Trabalho-UPXII---NextCity
-# 🌱 Plataforma de Sustentabilidade
+# 🌱 EcoPontos
 
 ## 📌 Sobre o projeto
 

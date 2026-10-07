@@ -1,0 +1,257 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoPontos — Transforme ações sustentáveis em recompensas reais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest-900:#14301F;
+    --forest-700:#1B7A4A;
+    --forest-500:#2E9E63;
+    --ink:#1C2430;
+    --ink-soft:#6B7684;
+    --bg:#F6F7FA;
+    --line:#E7E9EF;
+    --amber:#F2A93B;
+    --amber-bg:#FCE6BE;
+    --rose-bg:#FBD9E6;
+    --blue-bg:#CFE6FB;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Nunito', sans-serif; color:var(--ink); background:#fff; line-height:1.5;}
+  img,svg{display:block;}
+  a{text-decoration:none; color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* NAV */
+  header{position:sticky; top:0; background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); z-index:50;}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:1180px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:900; font-size:19px;}
+  .brand .ic{width:34px;height:34px;border-radius:10px;background:var(--forest-700);display:flex;align-items:center;justify-content:center;}
+  .navlinks{display:flex; gap:32px; font-weight:700; font-size:14.5px; color:var(--ink-soft);}
+  .nav-cta{background:var(--forest-700); color:#fff; padding:11px 22px; border-radius:100px; font-weight:800; font-size:14px;}
+
+  /* HERO */
+  .hero{background:linear-gradient(180deg,#F2FBF6 0%, #fff 100%); padding:72px 0 40px;}
+  .hero-grid{display:grid; grid-template-columns:1fr 440px; gap:48px; align-items:center;}
+  .pill{display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line); padding:7px 16px; border-radius:100px; font-weight:800; font-size:12.5px; color:var(--forest-700); margin-bottom:22px; box-shadow:0 2px 6px rgba(20,30,20,0.05);}
+  h1{font-size:50px; font-weight:900; line-height:1.08; letter-spacing:-0.01em; margin-bottom:20px;}
+  h1 .accent{color:var(--forest-700);}
+  .hero p.lead{font-size:17px; color:var(--ink-soft); font-weight:600; max-width:480px; margin-bottom:32px;}
+  .hero-ctas{display:flex; gap:14px; margin-bottom:38px;}
+  .btn-primary{background:var(--forest-700); color:#fff; padding:15px 28px; border-radius:100px; font-weight:800; font-size:15px; box-shadow:0 10px 22px rgba(27,122,74,0.28);}
+  .btn-ghost{background:#fff; border:1.5px solid var(--line); color:var(--ink); padding:15px 28px; border-radius:100px; font-weight:800; font-size:15px;}
+  .stat-row{display:flex; gap:36px;}
+  .stat .n{font-size:24px; font-weight:900; color:var(--forest-900);}
+  .stat .s{font-size:12.5px; color:var(--ink-soft); font-weight:700;}
+
+  .phone{width:300px; height:610px; margin:0 auto; background:var(--forest-900); border-radius:42px; padding:14px; box-shadow:0 30px 60px rgba(20,48,31,0.28); position:relative;}
+  .phone .notch{position:absolute; top:14px; left:50%; transform:translateX(-50%); width:96px; height:22px; background:var(--forest-900); border-radius:0 0 14px 14px; z-index:3;}
+  .phone .screen{width:100%; height:100%; background:var(--bg); border-radius:30px; overflow:hidden; padding:30px 18px 16px;}
+  .ph-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;}
+  .ph-hello .a{font-size:11px; color:var(--ink-soft); font-weight:700;}
+  .ph-hello .b{font-size:15px; font-weight:900;}
+  .ph-av{width:32px;height:32px;border-radius:50%;background:var(--amber-bg);}
+  .ph-card{background:linear-gradient(135deg,var(--forest-700),var(--forest-900)); border-radius:18px; padding:18px; color:#fff; margin-bottom:16px;}
+  .ph-card .l{font-size:11px; font-weight:700; opacity:.85;}
+  .ph-card .n{font-size:28px; font-weight:900; margin:2px 0 8px;}
+  .ph-card .b{display:inline-block; background:rgba(255,255,255,.18); padding:5px 11px; border-radius:100px; font-size:11px; font-weight:800;}
+  .ph-row{display:flex; align-items:center; gap:10px; background:#fff; border-radius:13px; padding:10px 12px; margin-bottom:9px; box-shadow:0 1px 2px rgba(20,30,20,0.05);}
+  .ph-ic{width:32px;height:32px;border-radius:9px; flex-shrink:0;}
+  .ph-t{flex:1; font-size:12px; font-weight:800;}
+  .ph-t .s{font-size:10px; color:var(--ink-soft); font-weight:700;}
+  .ph-pts{font-size:12px; font-weight:900; color:var(--forest-700);}
+
+  /* LOGOS / trust */
+  .trust{padding:26px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .trust .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+  .trust-label{font-size:12.5px; font-weight:800; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
+  .trust-items{display:flex; gap:28px; font-weight:800; color:var(--ink-soft); font-size:14px;}
+
+  /* FEATURES */
+  .section{padding:84px 0;}
+  .section-head{max-width:620px; margin:0 auto 54px; text-align:center;}
+  .eyebrow{color:var(--forest-700); font-weight:900; font-size:13px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;}
+  .section-head h2{font-size:34px; font-weight:900; margin-bottom:12px;}
+  .section-head p{color:var(--ink-soft); font-size:15.5px; font-weight:600;}
+
+  .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .feat-card{background:#F8FAF9; border:1px solid var(--line); border-radius:20px; padding:28px;}
+  .feat-ic{width:48px;height:48px;border-radius:13px; display:flex; align-items:center; justify-content:center; margin-bottom:18px;}
+  .feat-card h3{font-size:17px; font-weight:800; margin-bottom:8px;}
+  .feat-card p{font-size:13.5px; color:var(--ink-soft); font-weight:600; line-height:1.5;}
+
+  /* STEPS */
+  .steps{background:var(--forest-900); color:#fff; border-radius:28px; padding:56px 48px; display:grid; grid-template-columns:repeat(4,1fr); gap:28px;}
+  .step .num{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.14); display:flex;align-items:center;justify-content:center; font-weight:900; margin-bottom:16px;}
+  .step h4{font-size:15.5px; font-weight:800; margin-bottom:6px;}
+  .step p{font-size:13px; opacity:.78; font-weight:600;}
+
+  /* LEVELS */
+  .levels{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  .level-card{border-radius:18px; padding:22px; text-align:center;}
+  .level-card .ic{font-size:26px; margin-bottom:10px;}
+  .level-card .t{font-weight:900; font-size:14.5px; margin-bottom:3px;}
+  .level-card .s{font-size:11.5px; font-weight:700; opacity:.75;}
+
+  /* CTA */
+  .cta{background:linear-gradient(135deg,var(--forest-700),var(--forest-900)); border-radius:28px; padding:64px 48px; text-align:center; color:#fff;}
+  .cta h2{font-size:32px; font-weight:900; margin-bottom:14px;}
+  .cta p{opacity:.85; font-weight:600; margin-bottom:28px; font-size:15.5px;}
+  .cta .btn-primary{background:#fff; color:var(--forest-900); box-shadow:none;}
+
+  footer{padding:40px 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
+  footer .brand{font-size:15px;}
+  footer .fl{display:flex; gap:24px; font-size:13px; color:var(--ink-soft); font-weight:700;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2Z"/><path d="M5 20c2-6 5-9 10-12"/></svg></span>EcoPontos</div>
+    <div class="navlinks">
+      <a>Como funciona</a><a>Recursos</a><a>Níveis</a><a>Recompensas</a>
+    </div>
+    <a class="nav-cta">Começar agora</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pill">🌿 Agora disponível — Protótipo funcional</div>
+      <h1>Suas atitudes <span class="accent">sustentáveis</span> valem pontos de verdade</h1>
+      <p class="lead">O EcoPontos transforma ações do seu dia a dia — reciclar, economizar água, ir de bicicleta — em pontos que viram recompensas reais. Simples de registrar, fácil de acompanhar.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary">Criar minha conta</a>
+        <a class="btn-ghost">Ver como funciona</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="n">5+</div><div class="s">ações sustentáveis</div></div>
+        <div class="stat"><div class="n">4</div><div class="s">níveis de jornada</div></div>
+        <div class="stat"><div class="n">100%</div><div class="s">pontos validados no servidor</div></div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="ph-top">
+          <div class="ph-hello"><div class="a">Olá,</div><div class="b">Caio 👋</div></div>
+          <div class="ph-av"></div>
+        </div>
+        <div class="ph-card">
+          <div class="l">Seus pontos</div>
+          <div class="n">480 pts</div>
+          <div class="b">🌿 Guardião Verde</div>
+        </div>
+        <div class="ph-row"><div class="ph-ic" style="background:var(--blue-bg);"></div><div class="ph-t">Reciclagem de papel<div class="s">Hoje</div></div><div class="ph-pts">+20</div></div>
+        <div class="ph-row"><div class="ph-ic" style="background:var(--amber-bg);"></div><div class="ph-t">Ida de bicicleta<div class="s">Ontem</div></div><div class="ph-pts">+15</div></div>
+        <div class="ph-row"><div class="ph-ic" style="background:var(--rose-bg);"></div><div class="ph-t">Economia de água<div class="s">2 dias atrás</div></div><div class="ph-pts">+10</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <span class="trust-label">Desenvolvido com</span>
+    <div class="trust-items"><span>Java · Spring Boot</span><span>MySQL</span><span>JWT · Segurança</span><span>API REST</span></div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Recursos</div>
+      <h2>Tudo o que você precisa para manter o hábito</h2>
+      <p>Uma plataforma simples por fora, robusta por dentro — pensada para transformar pequenas ações em impacto contínuo.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-ic" style="background:var(--blue-bg);">♻️</div>
+        <h3>Ações sustentáveis</h3>
+        <p>Registre ações do dia a dia — reciclagem, transporte, economia de água — e ganhe pontos automaticamente.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic" style="background:var(--amber-bg);">🎁</div>
+        <h3>Recompensas reais</h3>
+        <p>Troque pontos por descontos e benefícios de parceiros, com validação de estoque e saldo em tempo real.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic" style="background:#E3F6EA;">🏆</div>
+        <h3>Ranking e níveis</h3>
+        <p>Acompanhe sua posição entre outros usuários e evolua de Iniciante a Embaixador Verde.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic" style="background:var(--rose-bg);">🔒</div>
+        <h3>Conta segura</h3>
+        <p>Login protegido por autenticação JWT e senhas criptografadas — seus dados ficam só com você.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic" style="background:#F1E8FB;">📊</div>
+        <h3>Histórico completo</h3>
+        <p>Veja todo seu histórico de ações, resgates e transações de pontos em um só lugar.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ic" style="background:#DCEFFB;">⚡</div>
+        <h3>Validação no servidor</h3>
+        <p>Toda pontuação é calculada e validada no backend — sem brechas, sem trapaça.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4>Crie sua conta</h4><p>Cadastro rápido com e-mail e senha.</p></div>
+      <div class="step"><div class="num">2</div><h4>Registre ações</h4><p>Escolha uma ação sustentável da lista.</p></div>
+      <div class="step"><div class="num">3</div><h4>Acumule pontos</h4><p>Pontos são creditados na hora, com segurança.</p></div>
+      <div class="step"><div class="num">4</div><h4>Resgate prêmios</h4><p>Troque pontos por recompensas reais.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Jornada</div>
+      <h2>Quatro níveis para evoluir</h2>
+      <p>Quanto mais pontos, mais alto o seu nível — e mais reconhecimento na comunidade.</p>
+    </div>
+    <div class="levels">
+      <div class="level-card" style="background:#F1F2F5;"><div class="ic">🌱</div><div class="t">Iniciante</div><div class="s">0 – 99 pts</div></div>
+      <div class="level-card" style="background:var(--blue-bg);"><div class="ic">🧭</div><div class="t">Explorador Verde</div><div class="s">100 – 299 pts</div></div>
+      <div class="level-card" style="background:#E3F6EA;"><div class="ic">🛡️</div><div class="t">Guardião Verde</div><div class="s">300 – 599 pts</div></div>
+      <div class="level-card" style="background:var(--amber-bg);"><div class="ic">🏅</div><div class="t">Embaixador Verde</div><div class="s">600+ pts</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta">
+      <h2>Comece sua jornada sustentável hoje</h2>
+      <p>Cadastro gratuito. Primeira ação registrada em menos de 2 minutos.</p>
+      <a class="btn-primary">Criar minha conta grátis</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+    <div class="brand">🌿 EcoPontos</div>
+    <div class="fl"><a>Sobre</a><a>Contato</a><a>Projeto acadêmico · FACENS</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
+
+</body></html>

@@ -10,7 +10,7 @@ O projeto busca unir **tecnologia e sustentabilidade**, tornando a prática de a
 
 ## 🔗 Acesse o projeto
 
-* 🌐 **Landing page:** https://caiobarreto2145-eng.github.io/Trabalho-UPXII---NextCity/
+* 🌐 **Landing page:** file:///C:/Users/caion/Downloads/ecopontos.html
 * 🎨 **Mockups das telas do app:** [`design/ecopontos_telas_app.png`](design/ecopontos_telas_app.png)
 * ⚙️ **Código do backend:** [`ecopontos-api/`](ecopontos-api/)
 

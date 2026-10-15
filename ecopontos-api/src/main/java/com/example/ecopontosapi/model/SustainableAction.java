@@ -1,0 +1,45 @@
+package com.example.ecopontosapi.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "sustainable_actions")
+public class SustainableAction {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(length = 50)
+    private String category;
+
+    @Column(nullable = false)
+    private Integer points;
+
+    @Column(nullable = false)
+    private Boolean active = true;
+
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public Integer getPoints() { return points; }
+    public void setPoints(Integer points) { this.points = points; }
+
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
+}

@@ -1,0 +1,13 @@
+# Copie este arquivo para "application.properties" e coloque a SUA senha do MySQL.
+# O application.properties real NÃO vai para o GitHub (está no .gitignore).
+spring.application.name=ecopontos-api
+spring.datasource.url=jdbc:mysql://localhost:3306/ecopontos_db?useSSL=false&serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true
+spring.datasource.username=root
+spring.datasource.password=SUA_SENHA_AQUI
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=false
+
+# Upload das fotos de comprovação
+spring.servlet.multipart.max-file-size=5MB
+spring.servlet.multipart.max-request-size=6MB
+app.upload-dir=uploads

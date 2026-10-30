@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoPontos — Pequenas ações. Grandes mudanças.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest-900:#122A20;
+    --forest-800:#1B4332;
+    --forest-700:#2D6A4F;
+    --sage-300:#95D5B2;
+    --sage-100:#DCEEE1;
+    --paper:#F5F7F1;
+    --paper-warm:#EFF3E9;
+    --white:#FFFFFF;
+    --ink:#15211B;
+    --ink-soft:#4B5A52;
+    --amber:#E3A857;
+    --amber-deep:#C98A3B;
+    --line:#D9E3DA;
+    --shadow-soft: 0 1px 2px rgba(18,42,32,0.04), 0 8px 24px rgba(18,42,32,0.06);
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 28px;
+    --maxw: 1180px;
+  }
+ 
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Manrope', sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    color:var(--forest-900);
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;cursor:pointer;}
+ 
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+ 
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+ 
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease;}
+  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in-view > *:nth-child(1){transition-delay:.02s;}
+  .reveal-stagger.in-view > *:nth-child(2){transition-delay:.09s;}
+  .reveal-stagger.in-view > *:nth-child(3){transition-delay:.16s;}
+  .reveal-stagger.in-view > *:nth-child(4){transition-delay:.23s;}
+  .reveal-stagger.in-view > *:nth-child(5){transition-delay:.30s;}
+ 
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 24px;
+    border-radius:100px;
+    font-weight:700;
+    font-size:15px;
+    border:1.5px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--forest-800); color:var(--white);}
+  .btn-primary:hover{background:var(--forest-900); transform:translateY(-2px); box-shadow:0 10px 24px rgba(18,42,32,0.22);}
+  .btn-ghost{background:transparent; color:var(--forest-900); border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--forest-800); transform:translateY(-2px);}
+  .btn-light{background:var(--white); color:var(--forest-900);}
+  .btn-light:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,0.18);}
+  .btn-outline-light{background:transparent;color:var(--white);border-color:rgba(255,255,255,0.4);}
+  .btn-outline-light:hover{border-color:var(--white); transform:translateY(-2px);}
+  .btn-sm{padding:10px 18px; font-size:14px;}
+ 
+  /* ---------- icon sprite ---------- */
+  .icon{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+ 
+  /* ================= NAVBAR ================= */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,255,255,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, box-shadow .3s ease;
+  }
+  header.scrolled{border-color:var(--line); box-shadow:0 2px 18px rgba(18,42,32,0.05);}
+  nav{
+    max-width:var(--maxw); margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    display:flex; align-items:center; gap:9px;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px; color:var(--forest-900);
+  }
+  .logo .logo-mark{
+    width:32px;height:32px;border-radius:9px;
+    background:linear-gradient(155deg, var(--forest-700), var(--forest-900));
+    display:flex;align-items:center;justify-content:center;
+  }
+  .logo .logo-mark svg{width:18px;height:18px;stroke:var(--sage-300);}
+  .nav-links{display:flex; gap:36px; align-items:center;}
+  .nav-links a{
+    font-size:15px; font-weight:600; color:var(--ink-soft);
+    position:relative; padding:4px 0; transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--forest-900);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px;
+    background:var(--amber); transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-actions{display:flex; align-items:center; gap:12px;}
+  .nav-toggle{display:none; background:none; border:none; padding:6px;}
+  .nav-toggle svg{width:26px;height:26px;stroke:var(--forest-900);}
+ 
+  .mobile-menu{
+    display:none; position:fixed; inset:0; z-index:99; background:var(--white);
+    padding:100px 32px 40px; flex-direction:column; gap:8px;
+    transform:translateX(100%); transition:transform .3s ease;
+  }
+  .mobile-menu.open{display:flex; transform:translateX(0);}
+  .mobile-menu a{font-size:19px; font-weight:600; padding:14px 0; border-bottom:1px solid var(--line); color:var(--forest-900);}
+  .mobile-menu .mobile-actions{margin-top:20px; display:flex; flex-direction:column; gap:12px;}
+ 
+  /* ================= HERO ================= */
+  .hero{
+    position:relative; overflow:hidden;
+    background:var(--paper);
+    padding:168px 0 96px;
+  }
+  .hero-topo{
+    position:absolute; inset:0; z-index:0; opacity:0.5; pointer-events:none;
+  }
+  .hero-grid{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13.5px; font-weight:700; color:var(--forest-700);
+    background:var(--sage-100); border-radius:100px; padding:7px 14px 7px 10px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);}
+  .hero h1{
+    font-size:clamp(38px, 5vw, 62px);
+    line-height:1.06;
+    font-weight:500;
+  }
+  .hero h1 .line2{display:block; font-weight:700; color:var(--forest-700);}
+  .hero-sub{
+    font-size:19px; color:var(--ink-soft); margin-top:22px; max-width:480px; font-weight:500;
+  }
+  .hero-text{
+    font-size:16px; color:var(--ink-soft); margin-top:16px; max-width:480px;
+  }
+  .hero-cta{display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;}
+ 
+  .hero-art{position:relative; height:460px;}
+  .hero-art-card{
+    position:absolute; inset:0;
+    border-radius:32px;
+    background:linear-gradient(160deg, var(--forest-800) 0%, var(--forest-900) 100%);
+    overflow:hidden;
+  }
+  .hero-art-rings{position:absolute; inset:0; opacity:.35;}
+  .hero-art-core{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:190px; height:190px;
+  }
+  .chip{
+    position:absolute; background:var(--white); border-radius:14px;
+    padding:11px 15px; box-shadow:var(--shadow-soft);
+    display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px;
+    animation:float 5s ease-in-out infinite;
+  }
+  .chip .chip-icon{width:26px;height:26px;border-radius:8px; display:flex;align-items:center;justify-content:center; flex-shrink:0;}
+  .chip-1{top:8%; left:-6%; animation-delay:0s;}
+  .chip-1 .chip-icon{background:var(--sage-100); color:var(--forest-700);}
+  .chip-2{bottom:14%; left:-4%; animation-delay:1.1s;}
+  .chip-2 .chip-icon{background:#FDF0DC; color:var(--amber-deep);}
+  .chip-3{top:40%; right:-8%; animation-delay:2.2s;}
+  .chip-3 .chip-icon{background:var(--sage-100); color:var(--forest-700);}
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+ 
+  @media (prefers-reduced-motion: reduce){ .chip{animation:none;} }
+ 
+  /* ================= BENEFITS STRIP ================= */
+  .benefits{
+    background:var(--forest-900); padding:56px 0;
+  }
+  .benefits-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+  }
+  .benefit-item{color:var(--white); display:flex; gap:14px; align-items:flex-start;}
+  .benefit-item .b-icon{
+    width:40px;height:40px;border-radius:11px; background:rgba(149,213,178,0.15);
+    display:flex;align-items:center;justify-content:center; flex-shrink:0;
+  }
+  .benefit-item .b-icon svg{stroke:var(--sage-300);}
+  .benefit-item h4{color:var(--white); font-size:16px; margin-bottom:4px;}
+  .benefit-item p{color:rgba(255,255,255,0.6); font-size:14px;}
+ 
+  /* ================= SECTION HEADERS ================= */
+  section{padding:104px 0;}
+  .section-head{max-width:600px; margin-bottom:56px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+  .section-kicker{font-size:14px; font-weight:700; color:var(--forest-700); margin-bottom:10px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); font-weight:600;}
+  .section-head p{font-size:16.5px; color:var(--ink-soft); margin-top:14px;}
+ 
+  /* ================= COMO FUNCIONA ================= */
+  .how{background:var(--white);}
+  .steps{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    position:relative;
+  }
+  .step{
+    position:relative; padding:0 24px 0 0;
+  }
+  .step:not(:last-child)::after{
+    content:''; position:absolute; top:26px; right:0; width:calc(100% - 56px); height:1.5px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px);
+  }
+  .step-num{
+    font-family:'Space Grotesk', sans-serif; font-size:15px; font-weight:700; color:var(--sage-300);
+    -webkit-text-stroke:1px var(--forest-700); color:transparent;
+    margin-bottom:18px; display:block;
+  }
+  .step-icon{
+    width:52px;height:52px;border-radius:14px; background:var(--sage-100);
+    display:flex;align-items:center;justify-content:center; margin-bottom:20px; color:var(--forest-700);
+  }
+  .step h3{font-size:18px; margin-bottom:8px;}
+  .step p{font-size:14.5px; color:var(--ink-soft);}
+ 
+  /* ================= AÇÕES SUSTENTÁVEIS ================= */
+  .actions{background:var(--paper);}
+  .actions-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+  }
+  .action-card{
+    background:var(--white); border-radius:var(--radius-md);
+    padding:28px; border:1px solid var(--line);
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .action-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-soft); border-color:transparent;}
+  .action-card .a-icon{
+    width:46px;height:46px;border-radius:12px; background:var(--sage-100); color:var(--forest-700);
+    display:flex;align-items:center;justify-content:center; margin-bottom:18px;
+  }
+  .action-card h3{font-size:17px; margin-bottom:8px;}
+  .action-card p{font-size:14.5px; color:var(--ink-soft); margin-bottom:16px;}
+  .action-points{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12.5px; font-weight:700; color:var(--amber-deep);
+    background:#FDF3E4; padding:5px 11px; border-radius:100px;
+  }
+  .action-note{margin-top:24px; font-size:13.5px; color:var(--ink-soft); font-style:italic;}
+ 
+  /* ================= GAMIFICAÇÃO (dark) ================= */
+  .gamify{
+    background:radial-gradient(circle at 15% 20%, #1E4636 0%, var(--forest-900) 55%);
+    color:var(--white);
+    position:relative; overflow:hidden;
+  }
+  .gamify .section-head h2{color:var(--white);}
+  .gamify .section-head p{color:rgba(255,255,255,0.65);}
+  .gamify .section-kicker{color:var(--sage-300);}
+  .gamify-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+  .gamify-features{display:flex; flex-direction:column; gap:22px;}
+  .gamify-feature{display:flex; gap:16px; align-items:flex-start;}
+  .gamify-feature .g-icon{
+    width:42px;height:42px;border-radius:12px; background:rgba(255,255,255,0.08);
+    display:flex;align-items:center;justify-content:center; flex-shrink:0; color:var(--sage-300);
+  }
+  .gamify-feature h4{color:var(--white); font-size:16px; margin-bottom:4px;}
+  .gamify-feature p{color:rgba(255,255,255,0.6); font-size:14.5px;}
+ 
+  .game-panel{
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);
+    border-radius:var(--radius-lg); padding:32px;
+    backdrop-filter:blur(6px);
+  }
+  .game-panel-label{font-size:12px; letter-spacing:0.03em; color:rgba(255,255,255,0.45); margin-bottom:22px;}
+  .game-badge{display:flex; align-items:center; gap:16px; margin-bottom:26px;}
+  .game-badge-icon{
+    width:58px;height:58px;border-radius:16px;
+    background:linear-gradient(155deg, var(--sage-300), var(--forest-700));
+    display:flex;align-items:center;justify-content:center;
+  }
+  .game-badge-icon svg{stroke:var(--forest-900); width:28px;height:28px;}
+  .game-level-name{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px;}
+  .game-level-sub{font-size:13px; color:rgba(255,255,255,0.5);}
+  .game-progress-track{
+    height:10px; background:rgba(255,255,255,0.1); border-radius:100px; overflow:hidden; margin-bottom:10px;
+  }
+  .game-progress-fill{
+    height:100%; width:68%; border-radius:100px;
+    background:linear-gradient(90deg, var(--sage-300), var(--amber));
+  }
+  .game-progress-labels{display:flex; justify-content:space-between; font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:28px;}
+  .game-stats-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .game-stat{background:rgba(255,255,255,0.05); border-radius:12px; padding:16px;}
+  .game-stat-num{font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700;}
+  .game-stat-label{font-size:12.5px; color:rgba(255,255,255,0.5); margin-top:2px;}
+  .game-example-tag{
+    margin-top:22px; font-size:12px; color:rgba(255,255,255,0.4);
+    display:flex; align-items:center; gap:6px;
+  }
+ 
+  /* ================= RECOMPENSAS ================= */
+  .rewards{background:var(--white);}
+  .rewards-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;}
+  .reward-card{
+    border-radius:var(--radius-md); padding:26px;
+    background:var(--paper-warm); border:1px solid var(--line);
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .reward-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-soft);}
+  .reward-card .r-icon{
+    width:44px;height:44px;border-radius:12px; background:var(--white); color:var(--amber-deep);
+    display:flex;align-items:center;justify-content:center; margin-bottom:16px; border:1px solid var(--line);
+  }
+  .reward-card h4{font-size:15.5px; margin-bottom:6px;}
+  .reward-card p{font-size:13.5px; color:var(--ink-soft);}
+  .rewards-note{margin-top:32px; font-size:15.5px; color:var(--ink-soft); max-width:560px;}
+ 
+  /* ================= PARA QUEM ================= */
+  .audience{background:var(--paper);}
+  .audience-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .audience-card{
+    background:var(--white); border-radius:var(--radius-md); padding:28px;
+    border:1px solid var(--line);
+  }
+  .audience-card .au-icon{
+    width:48px;height:48px;border-radius:12px; background:var(--forest-800); color:var(--sage-300);
+    display:flex;align-items:center;justify-content:center; margin-bottom:18px;
+  }
+  .audience-card h3{font-size:16.5px; margin-bottom:8px;}
+  .audience-card p{font-size:14px; color:var(--ink-soft);}
+ 
+  /* ================= DIFERENCIAL ================= */
+  .differential{background:var(--white);}
+  .diff-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+  .diff-item{padding-top:22px; border-top:2px solid var(--forest-800);}
+  .diff-item .d-icon{
+    width:44px;height:44px;border-radius:12px; background:var(--sage-100); color:var(--forest-700);
+    display:flex;align-items:center;justify-content:center; margin-bottom:20px;
+  }
+  .diff-item h3{font-size:19px; margin-bottom:10px;}
+  .diff-item p{font-size:15px; color:var(--ink-soft);}
+ 
+  /* ================= CTA FINAL ================= */
+  .cta-final{
+    background:linear-gradient(160deg, var(--forest-800), var(--forest-900));
+    padding:96px 0; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-final h2{color:var(--white); font-size:clamp(30px,4vw,46px); font-weight:600; max-width:640px; margin:0 auto;}
+  .cta-final p{color:rgba(255,255,255,0.68); font-size:17px; max-width:520px; margin:20px auto 0;}
+  .cta-final-actions{display:flex; gap:16px; justify-content:center; margin-top:36px; flex-wrap:wrap;}
+  .cta-final-secondary{margin-top:18px; font-size:14.5px; color:rgba(255,255,255,0.6);}
+  .cta-final-secondary a{font-weight:700; color:var(--sage-300); border-bottom:1px solid rgba(149,213,178,0.4);}
+  .cta-final-secondary a:hover{border-color:var(--sage-300);}
+ 
+  /* ================= FOOTER ================= */
+  footer{background:var(--forest-900); padding:64px 0 32px; color:rgba(255,255,255,0.55);}
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:40px;
+    padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.1);
+    flex-wrap:wrap;
+  }
+  .footer-brand .logo{color:var(--white);}
+  .footer-brand p{margin-top:10px; font-size:14.5px; color:rgba(255,255,255,0.5); max-width:260px;}
+  .footer-links{display:flex; gap:64px; flex-wrap:wrap;}
+  .footer-col h5{font-size:13px; color:rgba(255,255,255,0.4); margin-bottom:14px; font-weight:700;}
+  .footer-col ul{display:flex; flex-direction:column; gap:10px;}
+  .footer-col a{font-size:14.5px; transition:color .2s ease;}
+  .footer-col a:hover{color:var(--white);}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:28px; flex-wrap:wrap; gap:12px;
+  }
+  .footer-bottom span{font-size:13.5px;}
+  .badge-dev{
+    display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700;
+    color:var(--amber); background:rgba(227,168,87,0.12); padding:6px 13px; border-radius:100px;
+  }
+ 
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 980px){
+    .nav-links{display:none;}
+    .nav-toggle{display:flex;}
+    .hero{padding-top:140px;}
+    .hero-grid{grid-template-columns:1fr; gap:64px;}
+    .hero-art{height:340px; order:-1;}
+    .benefits-grid{grid-template-columns:repeat(2,1fr); gap:28px;}
+    .steps{grid-template-columns:repeat(2,1fr); row-gap:44px;}
+    .step:not(:last-child)::after{display:none;}
+    .actions-grid{grid-template-columns:repeat(2,1fr);}
+    .gamify-grid{grid-template-columns:1fr; gap:44px;}
+    .rewards-grid{grid-template-columns:repeat(2,1fr);}
+    .audience-grid{grid-template-columns:repeat(2,1fr);}
+    .diff-grid{grid-template-columns:1fr; gap:36px;}
+    .footer-links{gap:40px;}
+  }
+ 
+  @media (max-width: 620px){
+    .wrap{padding:0 20px;}
+    section{padding:72px 0;}
+    .hero{padding-top:120px; padding-bottom:64px;}
+    .hero-cta{flex-direction:column; align-items:stretch;}
+    .hero-cta .btn{width:100%;}
+    .benefits-grid{grid-template-columns:1fr; gap:22px;}
+    .steps{grid-template-columns:1fr; row-gap:36px;}
+    .actions-grid{grid-template-columns:1fr;}
+    .rewards-grid{grid-template-columns:1fr;}
+    .audience-grid{grid-template-columns:1fr;}
+    .cta-final-actions{flex-direction:column;}
+    .cta-final-actions .btn{width:100%;}
+    .footer-top{flex-direction:column;}
+    .footer-links{gap:32px;}
+    .footer-bottom{flex-direction:column; align-items:flex-start;}
+    .game-stats-row{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+ 
+<!-- ICON SPRITE -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2Z"/><path d="M5 20c2-6 5-9 10-12"/></symbol>
+    <symbol id="i-recycle" viewBox="0 0 24 24"><path d="M7 8 4 13l3 5"/><path d="M17 8h-6l3-5"/><path d="M20 16l-3 5H7"/><path d="M4 13h5"/><path d="M11 3l4 7"/><path d="M14 21l-4-7"/></symbol>
+    <symbol id="i-bike" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3.2"/><circle cx="18" cy="17" r="3.2"/><path d="M6 17l4-9h4l3 5"/><path d="M10 8h5"/><path d="M14 13h4"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c3.5 4 6 7.5 6 10.5a6 6 0 1 1-12 0C6 10.5 8.5 7 12 3Z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 3 6 12h3l-4 6h5v3h4v-3h5l-4-6h3L12 3Z"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/><path d="M10 16h4v3h-4z"/><path d="M8 21h8"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M4 9h16v4H4z"/><path d="M12 9v11"/><path d="M12 9C9 9 8 6.5 9.3 5.2 10.6 4 12 5.5 12 9Z"/><path d="M12 9c3 0 4-2.5 2.7-3.8C13.4 4 12 5.5 12 9Z"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 11 12 2l9 3-3 9-9 9-6-6 0-6Z" transform="translate(1,1) scale(0.9)"/><circle cx="8.5" cy="8.5" r="1.4"/><path d="M12 3 20 5l-2 8-8 8-6-6 8-12Z"/></symbol>
+    <symbol id="i-handshake" viewBox="0 0 24 24"><path d="M2 12l4-4 4 3 3-3 4 4"/><path d="M6 8l4 4-2 2-4-3"/><path d="M18 8l-4 4 2 2 4-3"/><path d="M9 13l2 2 2-2"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.5-4 4.5-6 7-6s5.5 2 7 6"/></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/><path d="M22 8v6"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></symbol>
+    <symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21v-8"/><path d="M9 21v-8"/><path d="M15 21v-8"/><path d="M19 21v-8"/><path d="M3 10l9-6 9 6"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21V11"/><path d="M12 11c0-4-3-6-7-6 0 4 3 6 7 6Z"/><path d="M12 11c0-3.5 2.5-5.5 6-5.5-0.3 3.5-2.7 5.5-6 5.5Z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.6 2.3 4 5.3 4 8.5s-1.4 6.2-4 8.5c-2.6-2.3-4-5.3-4-8.5s1.4-6.2 4-8.5Z"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="10" rx="4"/><path d="M7 11v4M5 13h4"/><circle cx="16" cy="12" r="1"/><circle cx="18.5" cy="14.5" r="1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  </defs>
+</svg>
+ 
+<!-- ================= NAVBAR ================= -->
+<header id="header">
+  <nav>
+    <a href="#topo" class="logo">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-leaf"/></svg></span>
+      EcoPontos
+    </a>
+    <ul class="nav-links">
+      <li><a href="#topo">Início</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#acoes">Ações</a></li>
+      <li><a href="#recompensas">Recompensas</a></li>
+      <li><a href="#sobre">Sobre o projeto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://trabalho-upxii-nextcity.onrender.com/index.html" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Entrar</a>
+      <a href="https://trabalho-upxii-nextcity.onrender.com/index.html" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Criar conta</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+ 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#topo">Início</a>
+  <a href="#como-funciona">Como funciona</a>
+  <a href="#acoes">Ações</a>
+  <a href="#recompensas">Recompensas</a>
+  <a href="#sobre">Sobre o projeto</a>
+  <div class="mobile-actions">
+    <a href="https://trabalho-upxii-nextcity.onrender.com/index.html" target="_blank" rel="noopener" class="btn btn-ghost">Entrar</a>
+    <a href="https://trabalho-upxii-nextcity.onrender.com/index.html" target="_blank" rel="noopener" class="btn btn-primary">Criar conta</a>
+  </div>
+</div>
+ 
+<!-- ================= HERO ================= -->
+<section class="hero" id="topo">
+  <svg class="hero-topo" viewBox="0 0 1200 700" preserveAspectRatio="none">
+    <g fill="none" stroke="#2D6A4F" stroke-width="1">
+      <path d="M-50 620 C 250 560, 450 680, 750 600 S 1150 560, 1300 610" opacity="0.14"/>
+      <path d="M-50 560 C 250 500, 450 620, 750 540 S 1150 500, 1300 550" opacity="0.12"/>
+      <path d="M-50 500 C 250 440, 450 560, 750 480 S 1150 440, 1300 490" opacity="0.10"/>
+      <path d="M-50 90 C 250 40, 500 120, 800 60 S 1150 30, 1300 70" opacity="0.10"/>
+    </g>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Plataforma de sustentabilidade gamificada</span>
+      <h1>Pequenas ações.<span class="line2">Grandes mudanças.</span></h1>
+      <p class="hero-sub">Transforme suas atitudes sustentáveis em pontos, conquistas e recompensas.</p>
+      <p class="hero-text">Faça sua parte pelo planeta: registre suas ações sustentáveis, acompanhe seu impacto e ganhe pontos para trocar por recompensas ao longo da jornada.</p>
+      <div class="hero-cta">
+        <a href="https://trabalho-upxii-nextcity.onrender.com/index.html" target="_blank" rel="noopener" class="btn btn-primary">Começar agora</a>
+        <a href="#como-funciona" class="btn btn-ghost">Como funciona</a>
+      </div>
+    </div>
+    <div class="hero-art reveal">
+      <div class="hero-art-card">
+        <svg class="hero-art-rings" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="160" fill="none" stroke="#95D5B2" stroke-width="1"/>
+          <circle cx="200" cy="200" r="120" fill="none" stroke="#95D5B2" stroke-width="1"/>
+          <circle cx="200" cy="200" r="80" fill="none" stroke="#95D5B2" stroke-width="1"/>
+        </svg>
+        <div class="hero-art-core">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#DCEEE1" stroke-width="1"><use href="#i-leaf"/></svg>
+        </div>
+      </div>
+      <div class="chip chip-1">
+        <span class="chip-icon"><svg class="icon" style="width:16px;height:16px"><use href="#i-target"/></svg></span>
+        +20 pontos
+      </div>
+      <div class="chip chip-2">
+        <span class="chip-icon"><svg class="icon" style="width:16px;height:16px"><use href="#i-sprout"/></svg></span>
+        Ação sustentável
+      </div>
+      <div class="chip chip-3">
+        <span class="chip-icon"><svg class="icon" style="width:16px;height:16px"><use href="#i-trophy"/></svg></span>
+        Nova conquista
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= BENEFITS STRIP ================= -->
+<section class="benefits" style="padding:56px 0;">
+  <div class="wrap benefits-grid reveal-stagger">
+    <div class="benefit-item">
+      <span class="b-icon"><svg class="icon"><use href="#i-sprout"/></svg></span>
+      <div><h4>Ações sustentáveis</h4><p>Um catálogo crescente de práticas do dia a dia</p></div>
+    </div>
+    <div class="benefit-item">
+      <span class="b-icon"><svg class="icon"><use href="#i-gift"/></svg></span>
+      <div><h4>Sistema de recompensas</h4><p>Pontos que se convertem em benefícios reais</p></div>
+    </div>
+    <div class="benefit-item">
+      <span class="b-icon"><svg class="icon"><use href="#i-gamepad"/></svg></span>
+      <div><h4>Gamificação</h4><p>Níveis, conquistas e desafios para engajar</p></div>
+    </div>
+    <div class="benefit-item">
+      <span class="b-icon"><svg class="icon"><use href="#i-globe"/></svg></span>
+      <div><h4>Impacto positivo</h4><p>Hábitos individuais somando um efeito coletivo</p></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= COMO FUNCIONA ================= -->
+<section class="how" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-kicker">O caminho</div>
+      <h2>Como funciona?</h2>
+      <p>Do primeiro gesto sustentável até a recompensa, o percurso é direto — em quatro passos.</p>
+    </div>
+    <div class="steps reveal-stagger">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+        <h3>Escolha uma ação</h3>
+        <p>Encontre uma prática sustentável que você pode realizar no seu dia a dia.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-icon"><svg class="icon"><use href="#i-check"/></svg></div>
+        <h3>Registre</h3>
+        <p>Informe na plataforma que realizou a ação escolhida.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-icon"><svg class="icon"><use href="#i-trophy"/></svg></div>
+        <h3>Ganhe pontos</h3>
+        <p>Receba pontos de acordo com a ação sustentável realizada.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-icon"><svg class="icon"><use href="#i-gift"/></svg></div>
+        <h3>Resgate</h3>
+        <p>Use seus pontos acumulados para trocar por recompensas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= AÇÕES SUSTENTÁVEIS ================= -->
+<section class="actions" id="acoes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-kicker">Catálogo de ações</div>
+      <h2>Suas ações fazem a diferença</h2>
+      <p>Alguns exemplos de práticas que poderão ser registradas na plataforma.</p>
+    </div>
+    <div class="actions-grid reveal-stagger">
+      <div class="action-card">
+        <div class="a-icon"><svg class="icon"><use href="#i-recycle"/></svg></div>
+        <h3>Reciclagem</h3>
+        <p>Separe corretamente os materiais recicláveis do seu dia a dia.</p>
+        <span class="action-points">Ex.: +15 pontos</span>
+      </div>
+      <div class="action-card">
+        <div class="a-icon"><svg class="icon"><use href="#i-bike"/></svg></div>
+        <h3>Mobilidade sustentável</h3>
+        <p>Utilize bicicleta ou outros meios de transporte sustentáveis.</p>
+        <span class="action-points">Ex.: +20 pontos</span>
+      </div>
+      <div class="action-card">
+        <div class="a-icon"><svg class="icon"><use href="#i-drop"/></svg></div>
+        <h3>Economia de água</h3>
+        <p>Evite desperdícios e reduza o consumo de água em casa.</p>
+        <span class="action-points">Ex.: +10 pontos</span>
+      </div>
+      <div class="action-card">
+        <div class="a-icon"><svg class="icon"><use href="#i-bolt"/></svg></div>
+        <h3>Economia de energia</h3>
+        <p>Reduza o consumo desnecessário de energia elétrica.</p>
+        <span class="action-points">Ex.: +10 pontos</span>
+      </div>
+      <div class="action-card">
+        <div class="a-icon"><svg class="icon"><use href="#i-tree"/></svg></div>
+        <h3>Plantio de árvores</h3>
+        <p>Contribua para o meio ambiente participando de plantios.</p>
+        <span class="action-points">Ex.: +30 pontos</span>
+      </div>
+    </div>
+    <p class="action-note">* Valores meramente ilustrativos — a pontuação real de cada ação será definida na plataforma.</p>
+  </div>
+</section>
+ 
+<!-- ================= GAMIFICAÇÃO ================= -->
+<section class="gamify">
+  <div class="wrap gamify-grid">
+    <div class="reveal">
+      <div class="section-kicker">A jornada</div>
+      <h2 style="margin-bottom:16px;">Transforme sustentabilidade em uma jornada</h2>
+      <p style="color:rgba(255,255,255,0.65); font-size:16.5px; margin-bottom:36px;">Pontos, níveis, conquistas e desafios tornam cada ação sustentável parte de um progresso visível.</p>
+      <div class="gamify-features">
+        <div class="gamify-feature">
+          <span class="g-icon"><svg class="icon"><use href="#i-target"/></svg></span>
+          <div><h4>Pontos por ação</h4><p>Cada prática registrada soma pontos ao seu perfil.</p></div>
+        </div>
+        <div class="gamify-feature">
+          <span class="g-icon"><svg class="icon"><use href="#i-trophy"/></svg></span>
+          <div><h4>Níveis e conquistas</h4><p>Evolua de nível conforme acumula pontos e desbloqueia conquistas.</p></div>
+        </div>
+        <div class="gamify-feature">
+          <span class="g-icon"><svg class="icon"><use href="#i-gamepad"/></svg></span>
+          <div><h4>Desafios e ranking</h4><p>Participe de desafios e acompanhe sua posição na comunidade.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="game-panel reveal">
+      <div class="game-panel-label">PERFIL — VISUALIZAÇÃO DE EXEMPLO</div>
+      <div class="game-badge">
+        <span class="game-badge-icon"><svg class="icon"><use href="#i-leaf"/></svg></span>
+        <div>
+          <div class="game-level-name">Nível 5 — Guardião Verde</div>
+          <div class="game-level-sub">1.250 pontos acumulados</div>
+        </div>
+      </div>
+      <div class="game-progress-track"><div class="game-progress-fill"></div></div>
+      <div class="game-progress-labels"><span>Nível 5</span><span>Nível 6</span></div>
+      <div class="game-stats-row">
+        <div class="game-stat">
+          <div class="game-stat-num">12</div>
+          <div class="game-stat-label">Conquistas</div>
+        </div>
+        <div class="game-stat">
+          <div class="game-stat-num">34</div>
+          <div class="game-stat-label">Ações registradas</div>
+        </div>
+      </div>
+      <div class="game-example-tag">
+        <svg class="icon" style="width:14px;height:14px"><use href="#i-check"/></svg>
+        Interface ilustrativa — números fictícios
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= RECOMPENSAS ================= -->
+<section class="rewards" id="recompensas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-kicker">Trocas</div>
+      <h2>Seus pontos podem virar recompensas</h2>
+      <p>Alguns exemplos de recompensas que poderão fazer parte da plataforma.</p>
+    </div>
+    <div class="rewards-grid reveal-stagger">
+      <div class="reward-card">
+        <div class="r-icon"><svg class="icon"><use href="#i-gift"/></svg></div>
+        <h4>Brindes sustentáveis</h4>
+        <p>Itens produzidos com materiais de baixo impacto ambiental.</p>
+      </div>
+      <div class="reward-card">
+        <div class="r-icon"><svg class="icon"><use href="#i-tag"/></svg></div>
+        <h4>Cupons de desconto</h4>
+        <p>Vantagens em produtos e serviços parceiros.</p>
+      </div>
+      <div class="reward-card">
+        <div class="r-icon"><svg class="icon"><use href="#i-sprout"/></svg></div>
+        <h4>Produtos ecológicos</h4>
+        <p>Itens sustentáveis para o dia a dia.</p>
+      </div>
+      <div class="reward-card">
+        <div class="r-icon"><svg class="icon"><use href="#i-handshake"/></svg></div>
+        <h4>Benefícios de parceiros</h4>
+        <p>Vantagens oferecidas por instituições parceiras do projeto.</p>
+      </div>
+    </div>
+    <p class="rewards-note">Quanto mais você participa, mais oportunidades de recompensas poderá conquistar.</p>
+  </div>
+</section>
+ 
+<!-- ================= PARA QUEM ================= -->
+<section class="audience" id="sobre">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-kicker">Para todos</div>
+      <h2>Para quem é o EcoPontos?</h2>
+      <p>Pensado para pessoas, mas com espaço para crescer junto de instituições.</p>
+    </div>
+    <div class="audience-grid reveal-stagger">
+      <div class="audience-card">
+        <div class="au-icon"><svg class="icon"><use href="#i-user"/></svg></div>
+        <h3>Pessoas</h3>
+        <p>Para quem deseja transformar hábitos sustentáveis em ações concretas.</p>
+      </div>
+      <div class="audience-card">
+        <div class="au-icon"><svg class="icon"><use href="#i-school"/></svg></div>
+        <h3>Escolas</h3>
+        <p>Para incentivar alunos e criar desafios ambientais em turma.</p>
+      </div>
+      <div class="audience-card">
+        <div class="au-icon"><svg class="icon"><use href="#i-briefcase"/></svg></div>
+        <h3>Empresas</h3>
+        <p>Para promover iniciativas sustentáveis entre colaboradores.</p>
+      </div>
+      <div class="audience-card">
+        <div class="au-icon"><svg class="icon"><use href="#i-landmark"/></svg></div>
+        <h3>Órgãos públicos</h3>
+        <p>Para estimular ações sustentáveis na comunidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= DIFERENCIAL ================= -->
+<section class="differential">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-kicker">Por dentro do projeto</div>
+      <h2>Por que EcoPontos?</h2>
+    </div>
+    <div class="diff-grid reveal-stagger">
+      <div class="diff-item">
+        <div class="d-icon"><svg class="icon"><use href="#i-leaf"/></svg></div>
+        <h3>Sustentabilidade</h3>
+        <p>Incentiva práticas que contribuem de forma real para o meio ambiente.</p>
+      </div>
+      <div class="diff-item">
+        <div class="d-icon"><svg class="icon"><use href="#i-gamepad"/></svg></div>
+        <h3>Gamificação</h3>
+        <p>Transforma ações sustentáveis em uma experiência mais motivadora.</p>
+      </div>
+      <div class="diff-item">
+        <div class="d-icon"><svg class="icon"><use href="#i-chip"/></svg></div>
+        <h3>Tecnologia</h3>
+        <p>Centraliza ações, pontos e recompensas em uma única plataforma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= CTA FINAL ================= -->
+<section class="cta-final">
+  <div class="wrap reveal">
+    <h2>Pronto para fazer a diferença?</h2>
+    <p>Comece com uma pequena ação e faça parte de uma comunidade que busca um futuro mais sustentável.</p>
+    <div class="cta-final-actions">
+      <a href="https://trabalho-upxii-nextcity.onrender.com/index.html" target="_blank" rel="noopener" class="btn btn-light">Criar minha conta</a>
+    </div>
+    <p class="cta-final-secondary">Já tenho uma conta → <a href="https://trabalho-upxii-nextcity.onrender.com/index.html" target="_blank" rel="noopener">Entrar</a></p>
+  </div>
+</section>
+ 
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#topo" class="logo">
+          <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-leaf"/></svg></span>
+          EcoPontos
+        </a>
+        <p>"Pequenas ações. Grandes mudanças."</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>NAVEGAÇÃO</h5>
+          <ul>
+            <li><a href="#topo">Início</a></li>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#acoes">Ações</a></li>
+            <li><a href="#recompensas">Recompensas</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 EcoPontos</span>
+      <span class="badge-dev">
+        <svg class="icon" style="width:14px;height:14px"><use href="#i-chip"/></svg>
+        Projeto acadêmico — Em desenvolvimento
+      </span>
+    </div>
+  </div>
+</footer>
+ 
+<script>
+  // header shadow on scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  });
+ 
+  // mobile menu
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.innerHTML = isOpen
+      ? '<svg class="icon"><use href="#i-close"/></svg>'
+      : '<svg class="icon"><use href="#i-menu"/></svg>';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.innerHTML = '<svg class="icon"><use href="#i-menu"/></svg>';
+    });
+  });
+ 
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
+ 
+</body>
+</html>
+ 
